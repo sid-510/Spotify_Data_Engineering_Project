@@ -48,8 +48,8 @@ def songs(data):
     
 def lambda_handler(event, context):
     s3 = boto3.client('s3')
-    Bucket = "spotify-etl-project-darshil"
-    Key = "raw_data/to_processed/"
+    Bucket = ""
+    Key = ""
     
     spotify_data = []
     spotify_keys = []
@@ -79,19 +79,19 @@ def lambda_handler(event, context):
         album_df['release_date'] = pd.to_datetime(album_df['release_date'])
         song_df['song_added'] =  pd.to_datetime(song_df['song_added'])
         
-        songs_key = "transformed_data/songs_data/songs_transformed_" + str(datetime.now()) + ".csv"
+        songs_key = "" + str(datetime.now()) + ".csv"
         song_buffer=StringIO()
         song_df.to_csv(song_buffer, index=False)
         song_content = song_buffer.getvalue()
         s3.put_object(Bucket=Bucket, Key=songs_key, Body=song_content)
         
-        album_key = "transformed_data/album_data/album_transformed_" + str(datetime.now()) + ".csv"
+        album_key = "" + str(datetime.now()) + ".csv"
         album_buffer=StringIO()
         album_df.to_csv(album_buffer, index=False)
         album_content = album_buffer.getvalue()
         s3.put_object(Bucket=Bucket, Key=album_key, Body=album_content)
         
-        artist_key = "transformed_data/artist_data/artist_transformed_" + str(datetime.now()) + ".csv"
+        artist_key = "" + str(datetime.now()) + ".csv"
         artist_buffer=StringIO()
         artist_df.to_csv(artist_buffer, index=False)
         artist_content = artist_buffer.getvalue()
@@ -103,5 +103,5 @@ def lambda_handler(event, context):
             'Bucket': Bucket,
             'Key': key
         }
-        s3_resource.meta.client.copy(copy_source, Bucket, 'raw_data/processed/' + key.split("/")[-1])    
+        s3_resource.meta.client.copy(copy_source, Bucket, '' + key.split("/")[-1])    
         s3_resource.Object(Bucket, key).delete()
