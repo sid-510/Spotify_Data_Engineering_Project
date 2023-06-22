@@ -73,7 +73,6 @@ def lambda_handler(event, context):
         artist_df = pd.DataFrame.from_dict(artist_list)
         artist_df = artist_df.drop_duplicates(subset=['artist_id'])
         
-        #Song Dataframe
         song_df = pd.DataFrame.from_dict(song_list)
         
         album_df['release_date'] = pd.to_datetime(album_df['release_date'])
