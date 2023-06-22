@@ -30,6 +30,6 @@ Used the Spotify API.
 
 ## Code
 
-Have used the ``spotify_api_data_extract.py`` python code to extract the details using Spotify API.
+Have used the ``spotify_api_data_extract.py`` python code in Lambda to extract the details using Spotify API.
 
-Have used the ``spotify_transformation_load_function.py`` python code to transform the extracted information.
+Have used the ``spotify_transformation_load_function.py`` python code in Lambda to transform the extracted information.
